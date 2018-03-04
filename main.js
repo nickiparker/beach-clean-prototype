@@ -51,6 +51,35 @@ var mainState = {
         this.bird.anchor.setTo(-0.2, 0.5); 
     },
 
+    // // TODO: Clean up collection items (score incremented!)
+    // addOneCollectionItem: function(x, y) {
+    //     // Create a pipe at the position x and y
+    //     var protectedItem = game.add.sprite(x, y, 'protected');
+
+    //     // Add the pipe to our previously created group
+    //     this.protectedItems.add(protectedItem);
+
+    //     // Enable physics on the protected item 
+    //     game.physics.arcade.enable(protectedItem);
+
+    //     // Add velocity to the protected item to make it move left
+    //     protectedItem.body.velocity.x = -200; 
+
+    //     // Automatically kill the protected item when it's no longer visible 
+    //     protectedItem.checkWorldBounds = true;
+    //     protectedItem.outOfBoundsKill = true;
+    // },
+
+    // addCollectionItems: function() {
+        
+    //     this.addOneCollectionItem(400, 4 * 60 + 10);
+
+    //     // Increases score by 1 each time new pipe is created    
+    //     this.score += 1;
+    //     this.labelScore.text = this.score;   
+    // },
+
+
     // TODO: Avoid protected items 
     // -- phase 1 - game stops
     // -- phase 2 - score penalised
@@ -75,7 +104,9 @@ var mainState = {
 
     addProtectedItems: function() {
         
-        this.addOneProtectedItem(400, 4 * 60 + 10);
+        var placement = Math.floor(Math.random() * 5) + 1;
+        // (width, height)
+        this.addOneProtectedItem(400, placement * 60 + 10);
 
         // Increases score by 1 each time new pipe is created    
         this.score += 1;
@@ -152,10 +183,6 @@ var mainState = {
     //         p.body.velocity.x = 0;
     //     }, this);
     // },
-
-    // TODO: Clean up collection items (score incremented!)
-
-
 
     update: function() {
         // This function is called 60 times per second    
