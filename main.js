@@ -12,7 +12,7 @@ var mainState = {
     create: function() { 
         // This function is called after the preload function     
         // Here we set up the game, display sprites, etc.
-        // Change the background color of the game to blue
+        // Change the background color of the game to orange
         game.stage.backgroundColor = '#f49b42';
 
         //Add sound into game
@@ -44,6 +44,9 @@ var mainState = {
         this.pipes = game.add.group();
 
         this.timer = game.time.events.loop(1500, this.addRowOfPipes, this);
+
+        // Move the anchor to the left and downward
+        this.bird.anchor.setTo(-0.2, 0.5); 
     },
 
     addOnePipe: function(x, y) {
@@ -110,6 +113,10 @@ var mainState = {
         //Each time the bird collides with a pipe fall off screen
         game.physics.arcade.overlap(
             this.bird, this.pipes, this.hitPipe, null, this);   
+
+        // slowly rotate the bird downward, up to a certain point.
+         if (this.bird.angle < 20)
+             this.bird.angle += 1; 
     },
 
     // Make the bird jump 
@@ -120,6 +127,9 @@ var mainState = {
             return;
         // Add a vertical velocity to the bird
         this.bird.body.velocity.y = -350;
+
+        // Get the bird to rotate upwards when jumping
+        game.add.tween(this.bird).to({angle: -20}, 100).start(); 
 
         //Adds sound effect on jump
         this.jumpSound.play();
