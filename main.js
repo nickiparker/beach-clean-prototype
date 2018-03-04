@@ -3,7 +3,7 @@ var mainState = {
     preload: function() { 
         // This function will be executed at the beginning     
         // That's where we load the images and sounds
-        game.load.image('pipe', 'assets/pipe.png');
+        game.load.image('diamond', 'assets/diamond.png');
         // Load the protected items
         game.load.image('protected', 'assets/protected.png');
         // Load the bird sprite
@@ -44,40 +44,46 @@ var mainState = {
 
         // Create an empty group
         this.protectedItems = game.add.group();
+        this.collectionItems = game.add.group();
+
+        game.physics.enable(this.collectionItems, Phaser.Physics.ARCADE);
 
         this.timer = game.time.events.loop(1500, this.addProtectedItems, this);
+        this.timer = game.time.events.loop(1500, this.addCollectionItems, this);
 
         // Move the anchor to the left and downward
-        this.bird.anchor.setTo(-0.2, 0.5); 
+        this.bird.anchor.setTo(-0.2, 0.5);
     },
 
-    // // TODO: Clean up collection items (score incremented!)
-    // addOneCollectionItem: function(x, y) {
-    //     // Create a pipe at the position x and y
-    //     var protectedItem = game.add.sprite(x, y, 'protected');
+    // TODO: Clean up collection items (score incremented!)
+    addOneCollectionItem: function(x, y) {
+        // Create a pipe at the position x and y
+        var collectionItem = game.add.sprite(x, y, 'diamond');
 
-    //     // Add the pipe to our previously created group
-    //     this.protectedItems.add(protectedItem);
+        // Add the pipe to our previously created group
+        this.collectionItems.add(collectionItem);
 
-    //     // Enable physics on the protected item 
-    //     game.physics.arcade.enable(protectedItem);
+        // Enable physics on the protected item 
+        game.physics.arcade.enable(collectionItem);
 
-    //     // Add velocity to the protected item to make it move left
-    //     protectedItem.body.velocity.x = -200; 
+        // Add velocity to the protected item to make it move left
+        collectionItem.body.velocity.x = -200; 
 
-    //     // Automatically kill the protected item when it's no longer visible 
-    //     protectedItem.checkWorldBounds = true;
-    //     protectedItem.outOfBoundsKill = true;
-    // },
+        // Automatically kill the protected item when it's no longer visible 
+        collectionItem.checkWorldBounds = true;
+        collectionItem.outOfBoundsKill = true;
+    },
 
-    // addCollectionItems: function() {
-        
-    //     this.addOneCollectionItem(400, 4 * 60 + 10);
+    addCollectionItems: function() {
+        this.addOneCollectionItem(400, 4 * 60 + 10);   
+    },
 
-    //     // Increases score by 1 each time new pipe is created    
-    //     this.score += 1;
-    //     this.labelScore.text = this.score;   
-    // },
+    collectItem: function(bird, collectionItem) {
+        collectionItem.kill();
+        this.collectionItems.remove(collectionItem);
+        this.score += 10;
+        labelScore = "Score: " + this.score;
+    },
 
 
     // TODO: Avoid protected items 
@@ -103,14 +109,13 @@ var mainState = {
     },
 
     addProtectedItems: function() {
-        
         var placement = Math.floor(Math.random() * 5) + 1;
         // (width, height)
         this.addOneProtectedItem(400, placement * 60 + 10);
 
         // Increases score by 1 each time new pipe is created    
         this.score += 1;
-        this.labelScore.text = this.score;   
+        this.labelScore.text = "Score: " + this.score;   
     },
 
     hitProtectedItem: function() {
@@ -195,7 +200,10 @@ var mainState = {
 
         //Each time the bird collides with a pipe fall off screen
         game.physics.arcade.overlap(
-            this.bird, this.protectedItems, this.hitProtectedItem, null, this);   
+            this.bird, this.protectedItems, this.hitProtectedItem, null, this);
+
+        // Each time the bird collects and item
+        game.physics.arcade.collide(this.bird, this.collectionItems, this.collectItem, null, this);   
     },
 
     // Make the bird jump 
