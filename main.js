@@ -169,10 +169,6 @@ var mainState = {
         //Each time the bird collides with a pipe fall off screen
         game.physics.arcade.overlap(
             this.bird, this.protectedItems, this.hitProtectedItem, null, this);   
-
-        // slowly rotate the bird downward, up to a certain point.
-         if (this.bird.angle < 20)
-             this.bird.angle += 1; 
     },
 
     // Make the bird jump 
@@ -183,9 +179,6 @@ var mainState = {
             return;
         // Add a vertical velocity to the bird
         this.bird.body.velocity.y = -350;
-
-        // Get the bird to rotate upwards when jumping
-        game.add.tween(this.bird).to({angle: -20}, 100).start(); 
 
         //Adds sound effect on jump
         this.jumpSound.play();
