@@ -53,6 +53,9 @@ var mainState = {
 
         // Move the anchor to the left and downward
         this.bird.anchor.setTo(-0.2, 0.5);
+
+        // Ensure bird does not move on collision with collection items
+        this.bird.body.immovable = true;
     },
 
     // TODO: Clean up collection items (score incremented!)
