@@ -22,8 +22,8 @@ var mainState = {
 
         // Add in score to display top left
         this.score = 0;
-        this.labelScore = game.add.text(20, 20, "0", 
-            { font: "30px Arial", fill: "#ffffff" });
+        this.labelScore = game.add.text(20, 20, "Score: 0", 
+            { font: "20px Arial", fill: "#ffffff" });
 
         // Set the physics system
         game.physics.startSystem(Phaser.Physics.ARCADE);
@@ -70,7 +70,7 @@ var mainState = {
         game.physics.arcade.enable(collectionItem);
 
         // Add velocity to the protected item to make it move left
-        collectionItem.body.velocity.x = -200; 
+        collectionItem.body.velocity.x = -350; 
 
         // Automatically kill the protected item when it's no longer visible 
         collectionItem.checkWorldBounds = true;
@@ -78,14 +78,16 @@ var mainState = {
     },
 
     addCollectionItems: function() {
-        this.addOneCollectionItem(400, 4 * 60 + 10);   
+        var placement = Math.floor(Math.random() * 6) + 1;
+        this.addOneCollectionItem(400, placement * 40 + 10);   
     },
 
     collectItem: function(bird, collectionItem) {
         collectionItem.kill();
         this.collectionItems.remove(collectionItem);
-        this.score += 10;
-        labelScore = "Score: " + this.score;
+        // update score
+        this.score += 1;
+        this.labelScore.text = "Score: " + this.score;
     },
 
 
@@ -104,7 +106,7 @@ var mainState = {
         game.physics.arcade.enable(protectedItem);
 
         // Add velocity to the protected item to make it move left
-        protectedItem.body.velocity.x = -200; 
+        protectedItem.body.velocity.x = -500; 
 
         // Automatically kill the protected item when it's no longer visible 
         protectedItem.checkWorldBounds = true;
@@ -114,11 +116,7 @@ var mainState = {
     addProtectedItems: function() {
         var placement = Math.floor(Math.random() * 5) + 1;
         // (width, height)
-        this.addOneProtectedItem(400, placement * 60 + 10);
-
-        // Increases score by 1 each time new pipe is created    
-        this.score += 1;
-        this.labelScore.text = "Score: " + this.score;   
+        this.addOneProtectedItem(400, placement * 60 + 10); 
     },
 
     hitProtectedItem: function() {
