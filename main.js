@@ -4,6 +4,8 @@ var mainState = {
         // This function will be executed at the beginning     
         // That's where we load the images and sounds
         game.load.image('pipe', 'assets/pipe.png');
+        // Load the protected items
+        game.load.image('protected', 'assets/protected.png');
         // Load the bird sprite
         game.load.image('bird', 'assets/bird.png');
         game.load.audio('jump', 'assets/jump.wav');
@@ -41,50 +43,47 @@ var mainState = {
         spaceKey.onDown.add(this.jump, this);
 
         // Create an empty group
-        this.pipes = game.add.group();
+        this.protectedItems = game.add.group();
 
-        this.timer = game.time.events.loop(1500, this.addRowOfPipes, this);
+        this.timer = game.time.events.loop(1500, this.addProtectedItems, this);
 
         // Move the anchor to the left and downward
         this.bird.anchor.setTo(-0.2, 0.5); 
     },
 
-    addOnePipe: function(x, y) {
+    // TODO: Avoid protected items 
+    // -- phase 1 - game stops
+    // -- phase 2 - score penalised
+    // -- phase 3 - lose a life
+    addOneProtectedItem: function(x, y) {
         // Create a pipe at the position x and y
-        var pipe = game.add.sprite(x, y, 'pipe');
+        var protectedItem = game.add.sprite(x, y, 'protected');
 
         // Add the pipe to our previously created group
-        this.pipes.add(pipe);
+        this.protectedItems.add(protectedItem);
 
-        // Enable physics on the pipe 
-        game.physics.arcade.enable(pipe);
+        // Enable physics on the protected item 
+        game.physics.arcade.enable(protectedItem);
 
-        // Add velocity to the pipe to make it move left
-        pipe.body.velocity.x = -200; 
+        // Add velocity to the protected item to make it move left
+        protectedItem.body.velocity.x = -200; 
 
-        // Automatically kill the pipe when it's no longer visible 
-        pipe.checkWorldBounds = true;
-        pipe.outOfBoundsKill = true;
+        // Automatically kill the protected item when it's no longer visible 
+        protectedItem.checkWorldBounds = true;
+        protectedItem.outOfBoundsKill = true;
     },
 
-    addRowOfPipes: function() {
-        // Randomly pick a number between 1 and 5
-        // This will be the hole position
-        var hole = Math.floor(Math.random() * 5) + 1;
-
-        // Add the 6 pipes 
-        // With one big hole at position 'hole' and 'hole + 1'
-        for (var i = 0; i < 8; i++)
-            if (i != hole && i != hole + 1) 
-                this.addOnePipe(400, i * 60 + 10);
+    addProtectedItems: function() {
+        
+        this.addOneProtectedItem(400, 4 * 60 + 10);
 
         // Increases score by 1 each time new pipe is created    
         this.score += 1;
         this.labelScore.text = this.score;   
     },
 
-    hitPipe: function() {
-        // If the bird has already hit a pipe, do nothing
+    hitProtectedItem: function() {
+        // If the bird has already hit a protected item, do nothing
         // It means the bird is already falling off the screen
         if (this.bird.alive == false)
             return;
@@ -92,14 +91,71 @@ var mainState = {
         // Set the alive property of the bird to false
         this.bird.alive = false;
 
-        // Prevent new pipes from appearing
+        // Prevent new protected items from appearing
         game.time.events.remove(this.timer);
 
-        // Go through all the pipes, and stop their movement
-        this.pipes.forEach(function(p){
+        // Go through all the protected items, and stop their movement
+        this.protectedItems.forEach(function(p){
             p.body.velocity.x = 0;
         }, this);
     },
+
+    // Original pipe items (part of original game)
+    // addOnePipe: function(x, y) {
+    //     // Create a pipe at the position x and y
+    //     var pipe = game.add.sprite(x, y, 'pipe');
+
+    //     // Add the pipe to our previously created group
+    //     this.pipes.add(pipe);
+
+    //     // Enable physics on the pipe 
+    //     game.physics.arcade.enable(pipe);
+
+    //     // Add velocity to the pipe to make it move left
+    //     pipe.body.velocity.x = -200; 
+
+    //     // Automatically kill the pipe when it's no longer visible 
+    //     pipe.checkWorldBounds = true;
+    //     pipe.outOfBoundsKill = true;
+    // },
+
+    // addRowOfPipes: function() {
+    //     // Randomly pick a number between 1 and 5
+    //     // This will be the hole position
+    //     var hole = Math.floor(Math.random() * 5) + 1;
+
+    //     // Add the 6 pipes 
+    //     // With one big hole at position 'hole' and 'hole + 1'
+    //     for (var i = 0; i < 8; i++)
+    //         if (i != hole && i != hole + 1) 
+    //             this.addOnePipe(400, i * 60 + 10);
+
+    //     // Increases score by 1 each time new pipe is created    
+    //     this.score += 1;
+    //     this.labelScore.text = this.score;   
+    // },
+
+    // hitPipe: function() {
+    //     // If the bird has already hit a pipe, do nothing
+    //     // It means the bird is already falling off the screen
+    //     if (this.bird.alive == false)
+    //         return;
+
+    //     // Set the alive property of the bird to false
+    //     this.bird.alive = false;
+
+    //     // Prevent new pipes from appearing
+    //     game.time.events.remove(this.timer);
+
+    //     // Go through all the pipes, and stop their movement
+    //     this.pipes.forEach(function(p){
+    //         p.body.velocity.x = 0;
+    //     }, this);
+    // },
+
+    // TODO: Clean up collection items (score incremented!)
+
+
 
     update: function() {
         // This function is called 60 times per second    
@@ -112,7 +168,7 @@ var mainState = {
 
         //Each time the bird collides with a pipe fall off screen
         game.physics.arcade.overlap(
-            this.bird, this.pipes, this.hitPipe, null, this);   
+            this.bird, this.protectedItems, this.hitProtectedItem, null, this);   
 
         // slowly rotate the bird downward, up to a certain point.
          if (this.bird.angle < 20)
