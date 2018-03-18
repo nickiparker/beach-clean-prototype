@@ -132,6 +132,9 @@ var mainState = {
         }
     },
 
+    // TODO: create scene obstacles (rocks, boats, and surfers etc)
+    // --> The below commented code can be used 
+    // --> as a starting block for this:
     // Original pipe items (part of original game)
     // addOnePipe: function(x, y) {
     //     // Create a pipe at the position x and y
@@ -194,6 +197,9 @@ var mainState = {
         if (this.bird.y < 0 || this.bird.y > 490)
             this.restartGame();
 
+        // leaving overlap as well as collide as they appear 
+        // to do the same thing - need to research further. 
+        // (note: overlap used in call to hitPipe function previously)
         //Each time the bird collides with a pipe fall off screen
         game.physics.arcade.overlap(
             this.bird, this.protectedItems, this.collectProtectedItem, null, this);
