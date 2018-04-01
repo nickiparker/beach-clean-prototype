@@ -20,10 +20,16 @@ var mainState = {
         game.load.image('bird', 'assets/seagull.png');
         game.load.audio('jump', 'assets/jump.wav');
 
-        
+        // Load background
+        game.load.image('bg', 'assets/background.png');  
     },
 
     create: function() { 
+        // Experiment with adding the background
+        //game.add.sprite(-52, -108, 'bg');
+        //game.bg = game.add.sprite(-52, -108, 'bg');
+        game.bg = game.add.tileSprite(0, 0, 400, 490, 'bg');
+
         // This function is called after the preload function     
         // Here we set up the game, display sprites, etc.
         // Change the background color of the game to orange
@@ -209,6 +215,8 @@ var mainState = {
     update: function() {
         // This function is called 60 times per second    
         // It contains the game's logic
+        // background Experiment
+        game.bg.tilePosition.x += 0.5;
 
         // If the bird is out of the screen (too high or too low)
         // Call the 'restartGame' function
