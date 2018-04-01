@@ -28,7 +28,7 @@ var mainState = {
         // Experiment with adding the background
         //game.add.sprite(-52, -108, 'bg');
         //game.bg = game.add.sprite(-52, -108, 'bg');
-        game.bg = game.add.tileSprite(0, 0, 400, 490, 'bg');
+        game.bg = game.add.tileSprite(0, 0, 400, 667, 'bg');
 
         // This function is called after the preload function     
         // Here we set up the game, display sprites, etc.
@@ -105,7 +105,7 @@ var mainState = {
 
     addCollectionItems: function() {
         var placement = Math.floor(Math.random() * 6) + 1;
-        this.addOneCollectionItem(400, placement * 40 + 10);   
+        this.addOneCollectionItem(400, placement * 120 + 100);    
     },
 
     collectItem: function(bird, collectionItem) {
@@ -138,9 +138,10 @@ var mainState = {
     },
 
     addProtectedItems: function() {
+        // 
         var placement = Math.floor(Math.random() * 5) + 1;
         // (width, height)
-        this.addOneProtectedItem(400, placement * 60 + 10); 
+        this.addOneProtectedItem(400, placement * 120 + 10); 
     },
 
     collectProtectedItem: function(bird, protectedItem) {
@@ -220,7 +221,7 @@ var mainState = {
 
         // If the bird is out of the screen (too high or too low)
         // Call the 'restartGame' function
-        if (this.bird.y < 0 || this.bird.y > 490)
+        if (this.bird.y < 0 || this.bird.y > 667)
             this.restartGame();
 
         // leaving overlap as well as collide as they appear 
@@ -255,8 +256,8 @@ var mainState = {
     },
 };
 
-// Initialize Phaser, and create a 400px by 490px game. The Phaser AUTO means that Phaser will try to use WebGL if available, otherwise will defualt back to canvas
-var game = new Phaser.Game(400, 490, Phaser.AUTO);
+// Initialize Phaser, and create a 400px by 600px game. The Phaser AUTO means that Phaser will try to use WebGL if available, otherwise will defualt back to canvas
+var game = new Phaser.Game(400, 667, Phaser.AUTO);
 
 // Add the 'mainState' and call it 'main'
 game.state.add('main', mainState); 
