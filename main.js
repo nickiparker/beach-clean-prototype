@@ -3,6 +3,12 @@ var collectionTypes = [];
 
 // Create our 'main' state that will contain the game
 var mainState = {
+    init: function() {
+        game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
+        game.scale.pageAlignHorizontally = true;
+        game.scale.pageAlignVertically = true;
+        game.stage.backgroundColor = '#0080ff';
+    },
     preload: function() { 
         // This function will be executed at the beginning     
         // That's where we load the images and sounds
@@ -28,7 +34,7 @@ var mainState = {
         // Experiment with adding the background
         //game.add.sprite(-52, -108, 'bg');
         //game.bg = game.add.sprite(-52, -108, 'bg');
-        game.bg = game.add.tileSprite(0, 0, 400, 667, 'bg');
+        game.bg = game.add.tileSprite(0, 0, 375, 667, 'bg');
 
         // This function is called after the preload function     
         // Here we set up the game, display sprites, etc.
@@ -105,7 +111,7 @@ var mainState = {
 
     addCollectionItems: function() {
         var placement = Math.floor(Math.random() * 6) + 1;
-        this.addOneCollectionItem(400, placement * 120 + 100);    
+        this.addOneCollectionItem(375, placement * 120 + 100);    
     },
 
     collectItem: function(bird, collectionItem) {
@@ -141,7 +147,7 @@ var mainState = {
         // 
         var placement = Math.floor(Math.random() * 5) + 1;
         // (width, height)
-        this.addOneProtectedItem(400, placement * 120 + 10); 
+        this.addOneProtectedItem(375, placement * 120 + 10); 
     },
 
     collectProtectedItem: function(bird, protectedItem) {
@@ -257,7 +263,7 @@ var mainState = {
 };
 
 // Initialize Phaser, and create a 400px by 600px game. The Phaser AUTO means that Phaser will try to use WebGL if available, otherwise will defualt back to canvas
-var game = new Phaser.Game(400, 667, Phaser.AUTO);
+var game = new Phaser.Game(375, 667, Phaser.AUTO);
 
 // Add the 'mainState' and call it 'main'
 game.state.add('main', mainState); 
