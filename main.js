@@ -7,7 +7,7 @@ var mainState = {
         // Load the protected items
         game.load.image('protected', 'assets/protected.png');
         // Load the bird sprite
-        game.load.image('bird', 'assets/bird.png');
+        game.load.image('bird', 'assets/seagull.png');
         game.load.audio('jump', 'assets/jump.wav');
     },
 
@@ -30,6 +30,7 @@ var mainState = {
 
         // Display the bird at the position x=100 and y=245
         this.bird = game.add.sprite(100, 245, 'bird');
+        this.bird.scale.setTo(0.1,0.1);
 
         // Add physics to the bird
         // Needed for: movements, gravity, collisions, etc.
