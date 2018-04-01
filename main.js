@@ -1,14 +1,26 @@
+// global variables
+var collectionTypes = [];
+
 // Create our 'main' state that will contain the game
 var mainState = {
     preload: function() { 
         // This function will be executed at the beginning     
         // That's where we load the images and sounds
+        // Load items of rubbish
+        game.load.image('bottle', 'assets/bottle.png');
         game.load.image('diamond', 'assets/diamond.png');
-        // Load the protected items
+        
+        // collate collection types
+        collectionTypes = ['diamond', 'bottle'];
+
+        // Load a protected item
         game.load.image('protected', 'assets/protected.png');
+        
         // Load the bird sprite
         game.load.image('bird', 'assets/seagull.png');
         game.load.audio('jump', 'assets/jump.wav');
+
+        
     },
 
     create: function() { 
@@ -63,8 +75,13 @@ var mainState = {
 
     // Clean up collection items (score incremented!)
     addOneCollectionItem: function(x, y) {
+
+        // Get random collection type item
+        var selectedCollectionItem = collectionTypes[Math.floor(Math.random()*collectionTypes.length)];
+
         // Create a pipe at the position x and y
-        var collectionItem = game.add.sprite(x, y, 'diamond');
+        var collectionItem = game.add.sprite(x, y, selectedCollectionItem);
+        collectionItem.scale.setTo(0.2,0.2);
 
         // Add the collection item to our previously created group
         this.collectionItems.add(collectionItem);
