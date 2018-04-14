@@ -133,8 +133,10 @@ var mainState = {
     },
 
     addCollectionItems: function() {
+        // Item placement - random number 1 to 6       
         var placement = Math.floor(Math.random() * 6) + 1;
-        this.addOneCollectionItem(375, placement * 120 + 100);    
+        // Use placement to determine y position for item (width, height)
+        this.addOneCollectionItem(375, placement * 80 + 120);    
     },
 
     collectItem: function(bird, collectionItem) {
@@ -153,6 +155,11 @@ var mainState = {
         // Get random natural type item
         var selectedNaturalItem = naturalTypes[Math.floor(Math.random()*naturalTypes.length)];
 
+        // if fish we need to position it only in the sea
+        if (selectedNaturalItem == "fish"){
+            var placement = Math.floor(Math.random() * 3) + 1;
+            y = placement * 100 + 80;
+        }
         // Create a natural item at the position x and y
         var naturalItem = game.add.sprite(x, y, selectedNaturalItem);
 
@@ -177,10 +184,10 @@ var mainState = {
     },
 
     addNaturalItems: function() {
-        // 
+        // Item placement - random number 1 to 5        
         var placement = Math.floor(Math.random() * 5) + 1;
-        // (width, height)
-        this.addOneNaturalItem(375, placement * 120 + 10); 
+        // Use placement to determine y position for item (width, height)
+        this.addOneNaturalItem(375, placement * 100 + 100); 
     },
 
     collectNaturalItem: function(bird, naturalItem) {
