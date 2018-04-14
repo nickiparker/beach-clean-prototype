@@ -39,6 +39,11 @@ var mainState = {
 
         // Load collision item
         game.load.image('largeRock', 'assets/large-rock.png'); 
+        game.load.image('fishingBoat', 'assets/fishing-boat.png');
+        game.load.image('supMan', 'assets/sup-man.png');
+
+        // collate collision items
+        collisionTypes = ['largeRock', 'fishingBoat', 'supMan'];
     },
 
     create: function() { 
@@ -211,8 +216,12 @@ var mainState = {
 
     // Create scene obstacles (rocks, boats, and surfers etc)
     addOneCollisionItem: function(x, y) {
+
+        // Get random natural type item
+        var selectedCollisionItem = collisionTypes[Math.floor(Math.random()*collisionTypes.length)];
+
         // Create a collision item at the position x and y
-        var collisionItem = game.add.sprite(x, y, 'largeRock');
+        var collisionItem = game.add.sprite(x, y, selectedCollisionItem);
 
         var scale = Math.random() * 0.5 + 0.5;
         // Random scale for collision item
