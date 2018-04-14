@@ -15,9 +15,11 @@ var mainState = {
         // Load items of rubbish
         game.load.image('bottle', 'assets/bottle.png');
         game.load.image('can', 'assets/can.png');
+        game.load.image('net', 'assets/net.png');
+        game.load.image('bucket', 'assets/bucket.png');
         
         // collate collection types
-        collectionTypes = ['can', 'bottle'];
+        collectionTypes = ['can', 'bottle', 'net', 'bucket'];
 
         // Load a natural item
         game.load.image('seaweed', 'assets/seaweed.png');
