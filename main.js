@@ -1,5 +1,6 @@
 // global variables
 var collectionTypes = [];
+var naturalTypes = [];
 
 // Create our 'main' state that will contain the game
 var mainState = {
@@ -23,6 +24,11 @@ var mainState = {
 
         // Load a natural item
         game.load.image('seaweed', 'assets/seaweed.png');
+        game.load.image('crab', 'assets/crab.png');
+        game.load.image('fish', 'assets/fish.png');
+
+        // collate natural items
+        naturalTypes = ['seaweed', 'crab', 'fish'];
         
         // Load the bird sprite
         game.load.image('bird', 'assets/seagull.png');
@@ -143,8 +149,12 @@ var mainState = {
     // Avoid natural items (seaweed and fish etc)
     // -- score penalised
     addOneNaturalItem: function(x, y) {
-        // Create a pipe at the position x and y
-        var naturalItem = game.add.sprite(x, y, 'seaweed');
+
+        // Get random natural type item
+        var selectedNaturalItem = naturalTypes[Math.floor(Math.random()*naturalTypes.length)];
+
+        // Create a natural item at the position x and y
+        var naturalItem = game.add.sprite(x, y, selectedNaturalItem);
 
         // Scale item to fit screen
         naturalItem.scale.setTo(0.2,0.2);
