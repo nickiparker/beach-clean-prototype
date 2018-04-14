@@ -52,8 +52,8 @@ var mainState = {
         // Set the physics system
         game.physics.startSystem(Phaser.Physics.ARCADE);
 
-        // Display the bird at the position x=100 and y=245
-        this.bird = game.add.sprite(100, 245, 'bird');
+        // Display the bird at the position x=50 and y=245
+        this.bird = game.add.sprite(50, 245, 'bird');
         this.bird.scale.setTo(0.35,0.35);
 
         // Add physics to the bird
