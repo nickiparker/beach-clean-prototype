@@ -98,10 +98,18 @@ var mainState = {
         
         // Scale collection item according to type
         if (collectionItem.key == "can") {
-            collectionItem.scale.setTo(0.15,0.15);
-            collectionItem.angle += Math.floor(Math.random()*100); 
+            collectionItem.scale.setTo(0.15,0.15); 
         } else {
             collectionItem.scale.setTo(0.2,0.2);
+        }
+
+        // Randomise collection type angle according to type 
+        // - making sure bottle doesn't go higher than 50
+        if (collectionItem.key != "bottle") {
+            collectionItem.angle += Math.floor(Math.random()*100);
+        }
+        else{
+            collectionItem.angle += Math.floor(Math.random()*50);
         }
 
         // Add the collection item to our previously created group
