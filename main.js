@@ -91,9 +91,15 @@ var mainState = {
         // Get random collection type item
         var selectedCollectionItem = collectionTypes[Math.floor(Math.random()*collectionTypes.length)];
 
-        // Create a pipe at the position x and y
+        // Create the collection item at the position x and y
         var collectionItem = game.add.sprite(x, y, selectedCollectionItem);
-        collectionItem.scale.setTo(0.2,0.2);
+        
+        // Scale collection item according to type
+        if (collectionItem.key == "can") {
+            collectionItem.scale.setTo(0.15,0.15);
+        } else {
+            collectionItem.scale.setTo(0.2,0.2);
+        }
 
         // Add the collection item to our previously created group
         this.collectionItems.add(collectionItem);
