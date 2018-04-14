@@ -159,6 +159,9 @@ var mainState = {
         // Scale item to fit screen
         naturalItem.scale.setTo(0.2,0.2);
 
+        // Rotate item 
+        naturalItem.angle += Math.floor(Math.random() * 50);
+
         // Add the natural item to our previously created group
         this.naturalItems.add(naturalItem);
 
