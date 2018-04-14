@@ -220,12 +220,23 @@ var mainState = {
         // Get random natural type item
         var selectedCollisionItem = collisionTypes[Math.floor(Math.random()*collisionTypes.length)];
 
+        // if fishing boat or sup boarder we need to position them only in the sea
+        if (selectedCollisionItem == "fishingBoat" || selectedCollisionItem == "supMan"){
+            var placement = Math.floor(Math.random() * 3) + 1;
+            y = placement * 100 + 80;
+        }
+
         // Create a collision item at the position x and y
         var collisionItem = game.add.sprite(x, y, selectedCollisionItem);
 
-        var scale = Math.random() * 0.5 + 0.5;
-        // Random scale for collision item
-        collisionItem.scale.setTo(scale, scale);
+        if (selectedCollisionItem == "largeRock")
+            {
+            var scale = Math.random() * 0.5 + 0.5;
+            // Random scale for collision item
+            collisionItem.scale.setTo(scale, scale);
+        } else {
+            collisionItem.scale.setTo(0.4,0.4);
+        }
 
         // Add the collision item to our previously created group
         this.collisionItems.add(collisionItem);
