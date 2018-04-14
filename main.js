@@ -14,10 +14,10 @@ var mainState = {
         // That's where we load the images and sounds
         // Load items of rubbish
         game.load.image('bottle', 'assets/bottle.png');
-        game.load.image('diamond', 'assets/diamond.png');
+        game.load.image('can', 'assets/can.png');
         
         // collate collection types
-        collectionTypes = ['diamond', 'bottle'];
+        collectionTypes = ['can', 'bottle'];
 
         // Load a protected item
         game.load.image('protected', 'assets/protected.png');
