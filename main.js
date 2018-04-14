@@ -97,6 +97,7 @@ var mainState = {
         // Scale collection item according to type
         if (collectionItem.key == "can") {
             collectionItem.scale.setTo(0.15,0.15);
+            collectionItem.angle += Math.floor(Math.random()*100); 
         } else {
             collectionItem.scale.setTo(0.2,0.2);
         }
