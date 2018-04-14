@@ -20,7 +20,7 @@ var mainState = {
         collectionTypes = ['can', 'bottle'];
 
         // Load a protected item
-        game.load.image('protected', 'assets/protected.png');
+        game.load.image('seaweed', 'assets/seaweed.png');
         
         // Load the bird sprite
         game.load.image('bird', 'assets/seagull.png');
@@ -133,7 +133,10 @@ var mainState = {
     // -- score penalised
     addOneProtectedItem: function(x, y) {
         // Create a pipe at the position x and y
-        var protectedItem = game.add.sprite(x, y, 'protected');
+        var protectedItem = game.add.sprite(x, y, 'seaweed');
+
+        // Scale item to fit screen
+        protectedItem.scale.setTo(0.2,0.2);
 
         // Add the protected item to our previously created group
         this.protectedItems.add(protectedItem);
