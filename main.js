@@ -19,7 +19,7 @@ var mainState = {
         // collate collection types
         collectionTypes = ['can', 'bottle'];
 
-        // Load a protected item
+        // Load a natural item
         game.load.image('seaweed', 'assets/seaweed.png');
         
         // Load the bird sprite
@@ -68,14 +68,14 @@ var mainState = {
         spaceKey.onDown.add(this.jump, this);
 
         // Create an empty group
-        this.protectedItems = game.add.group();
+        this.naturalItems = game.add.group();
         this.collectionItems = game.add.group();
 
         // enable physics on the groups
         game.physics.enable(this.collectionItems, Phaser.Physics.ARCADE);
-        game.physics.enable(this.protectedItems, Phaser.Physics.ARCADE);
+        game.physics.enable(this.naturalItems, Phaser.Physics.ARCADE);
 
-        this.timer = game.time.events.loop(1500, this.addProtectedItems, this);
+        this.timer = game.time.events.loop(1500, this.addNaturalItems, this);
         this.timer = game.time.events.loop(1500, this.addCollectionItems, this);
 
         // Move the anchor to the left and downward
@@ -107,10 +107,10 @@ var mainState = {
         // Enable physics on the collection item 
         game.physics.arcade.enable(collectionItem);
 
-        // Add velocity to the protected item to make it move left
+        // Add velocity to the natural item to make it move left
         collectionItem.body.velocity.x = -350; 
 
-        // Automatically kill the protected item when it's no longer visible 
+        // Automatically kill the natural item when it's no longer visible 
         collectionItem.checkWorldBounds = true;
         collectionItem.outOfBoundsKill = true;
     },
@@ -129,39 +129,39 @@ var mainState = {
     },
 
 
-    // Avoid protected items (seaweed and fish etc)
+    // Avoid natural items (seaweed and fish etc)
     // -- score penalised
-    addOneProtectedItem: function(x, y) {
+    addOneNaturalItem: function(x, y) {
         // Create a pipe at the position x and y
-        var protectedItem = game.add.sprite(x, y, 'seaweed');
+        var naturalItem = game.add.sprite(x, y, 'seaweed');
 
         // Scale item to fit screen
-        protectedItem.scale.setTo(0.2,0.2);
+        naturalItem.scale.setTo(0.2,0.2);
 
-        // Add the protected item to our previously created group
-        this.protectedItems.add(protectedItem);
+        // Add the natural item to our previously created group
+        this.naturalItems.add(naturalItem);
 
-        // Enable physics on the protected item 
-        game.physics.arcade.enable(protectedItem);
+        // Enable physics on the natural item 
+        game.physics.arcade.enable(naturalItem);
 
-        // Add velocity to the protected item to make it move left
-        protectedItem.body.velocity.x = -300; 
+        // Add velocity to the natural item to make it move left
+        naturalItem.body.velocity.x = -300; 
 
-        // Automatically kill the protected item when it's no longer visible 
-        protectedItem.checkWorldBounds = true;
-        protectedItem.outOfBoundsKill = true;
+        // Automatically kill the natural item when it's no longer visible 
+        naturalItem.checkWorldBounds = true;
+        naturalItem.outOfBoundsKill = true;
     },
 
-    addProtectedItems: function() {
+    addNaturalItems: function() {
         // 
         var placement = Math.floor(Math.random() * 5) + 1;
         // (width, height)
-        this.addOneProtectedItem(375, placement * 120 + 10); 
+        this.addOneNaturalItem(375, placement * 120 + 10); 
     },
 
-    collectProtectedItem: function(bird, protectedItem) {
-        protectedItem.kill();
-        this.protectedItems.remove(protectedItem);
+    collectNaturalItem: function(bird, naturalItem) {
+        naturalItem.kill();
+        this.naturalItems.remove(naturalItem);
         // update score - penalise by 2 points
         if (this.score > 1){
             this.score -= 2;
@@ -244,7 +244,7 @@ var mainState = {
         // (note: overlap used in call to hitPipe function previously)
         //Each time the bird collides with a pipe fall off screen
         game.physics.arcade.overlap(
-            this.bird, this.protectedItems, this.collectProtectedItem, null, this);
+            this.bird, this.naturalItems, this.collectNaturalItem, null, this);
 
         // Each time the bird collects and item
         game.physics.arcade.collide(
