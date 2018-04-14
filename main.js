@@ -209,28 +209,25 @@ var mainState = {
         }
     },
 
-    // TODO: create scene obstacles (rocks, boats, and surfers etc)
-    // --> The below commented code can be used 
-    // --> as a starting block for this:
-    // Original pipe items (part of original game)
+    // Create scene obstacles (rocks, boats, and surfers etc)
     addOneCollisionItem: function(x, y) {
-        // Create a pipe at the position x and y
+        // Create a collision item at the position x and y
         var collisionItem = game.add.sprite(x, y, 'largeRock');
 
         var scale = Math.random() * 0.5 + 0.5;
         // Random scale for collision item
         collisionItem.scale.setTo(scale, scale);
 
-        // Add the pipe to our previously created group
+        // Add the collision item to our previously created group
         this.collisionItems.add(collisionItem);
 
-        // Enable physics on the pipe 
+        // Enable physics on the collision item 
         game.physics.arcade.enable(collisionItem);
 
-        // Add velocity to the pipe to make it move left
+        // Add velocity to the collision item to make it move left
         collisionItem.body.velocity.x = -200; 
 
-        // Automatically kill the pipe when it's no longer visible 
+        // Automatically kill the collision item when it's no longer visible 
         collisionItem.checkWorldBounds = true;
         collisionItem.outOfBoundsKill = true;
     },
