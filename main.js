@@ -35,7 +35,10 @@ var mainState = {
         game.load.audio('jump', 'assets/jump.wav');
 
         // Load background
-        game.load.image('bg', 'assets/background.png');  
+        game.load.image('bg', 'assets/background.png'); 
+
+        // Load collision item
+        game.load.image('largeRock', 'assets/large-rock.png'); 
     },
 
     create: function() { 
@@ -78,13 +81,16 @@ var mainState = {
         // Create an empty group
         this.naturalItems = game.add.group();
         this.collectionItems = game.add.group();
+        this.collisionItems = game.add.group();
 
         // enable physics on the groups
         game.physics.enable(this.collectionItems, Phaser.Physics.ARCADE);
         game.physics.enable(this.naturalItems, Phaser.Physics.ARCADE);
+        game.physics.enable(this.collisionItems, Phaser.Physics.ARCADE);
 
         this.timer = game.time.events.loop(1500, this.addNaturalItems, this);
         this.timer = game.time.events.loop(1500, this.addCollectionItems, this);
+        this.timer = game.time.events.loop(4000, this.addCollisionItems, this);
 
         // Move the anchor to the left and downward
         this.bird.anchor.setTo(-0.2, 0.5);
@@ -207,57 +213,55 @@ var mainState = {
     // --> The below commented code can be used 
     // --> as a starting block for this:
     // Original pipe items (part of original game)
-    // addOnePipe: function(x, y) {
-    //     // Create a pipe at the position x and y
-    //     var pipe = game.add.sprite(x, y, 'pipe');
+    addOneCollisionItem: function(x, y) {
+        // Create a pipe at the position x and y
+        var collisionItem = game.add.sprite(x, y, 'largeRock');
 
-    //     // Add the pipe to our previously created group
-    //     this.pipes.add(pipe);
+        var scale = Math.random() * 0.5 + 0.5;
+        // Random scale for collision item
+        collisionItem.scale.setTo(scale, scale);
 
-    //     // Enable physics on the pipe 
-    //     game.physics.arcade.enable(pipe);
+        // Add the pipe to our previously created group
+        this.collisionItems.add(collisionItem);
 
-    //     // Add velocity to the pipe to make it move left
-    //     pipe.body.velocity.x = -200; 
+        // Enable physics on the pipe 
+        game.physics.arcade.enable(collisionItem);
 
-    //     // Automatically kill the pipe when it's no longer visible 
-    //     pipe.checkWorldBounds = true;
-    //     pipe.outOfBoundsKill = true;
-    // },
+        // Add velocity to the pipe to make it move left
+        collisionItem.body.velocity.x = -200; 
 
-    // addRowOfPipes: function() {
-    //     // Randomly pick a number between 1 and 5
-    //     // This will be the hole position
-    //     var hole = Math.floor(Math.random() * 5) + 1;
+        // Automatically kill the pipe when it's no longer visible 
+        collisionItem.checkWorldBounds = true;
+        collisionItem.outOfBoundsKill = true;
+    },
 
-    //     // Add the 6 pipes 
-    //     // With one big hole at position 'hole' and 'hole + 1'
-    //     for (var i = 0; i < 8; i++)
-    //         if (i != hole && i != hole + 1) 
-    //             this.addOnePipe(400, i * 60 + 10);
+    addCollisionItems: function() {
+        // Item placement - random number 1 to 2        
+        var placement = Math.floor(Math.random() * 2) + 1;
+        // Use placement to determine y position for item (width, height)
+        // Add the collision item 
+        this.addOneCollisionItem(375, placement * 200 + 140);  
+    },
 
-    //     // Increases score by 1 each time new pipe is created    
-    //     this.score += 1;
-    //     this.labelScore.text = this.score;   
-    // },
+    hitCollisionItem: function() {
+        // If the bird has already hit a collision item, do nothing
+        // It means the bird is already falling off the screen
+        if (this.bird.alive == false)
+            return;
 
-    // hitPipe: function() {
-    //     // If the bird has already hit a pipe, do nothing
-    //     // It means the bird is already falling off the screen
-    //     if (this.bird.alive == false)
-    //         return;
+        // Set the alive property of the bird to false
+        this.bird.alive = false;
 
-    //     // Set the alive property of the bird to false
-    //     this.bird.alive = false;
+        // Prevent new collision items from appearing
+        game.time.events.remove(this.timer);
 
-    //     // Prevent new pipes from appearing
-    //     game.time.events.remove(this.timer);
+        // Go through all the collision items, and stop their movement
+        this.collisionItems.forEach(function(p){
+            p.body.velocity.x = 0;
+        }, this);
 
-    //     // Go through all the pipes, and stop their movement
-    //     this.pipes.forEach(function(p){
-    //         p.body.velocity.x = 0;
-    //     }, this);
-    // },
+        this.restartGame();
+    },
 
     update: function() {
         // This function is called 60 times per second    
@@ -270,16 +274,17 @@ var mainState = {
         if (this.bird.y < 0 || this.bird.y > 667)
             this.restartGame();
 
-        // leaving overlap as well as collide as they appear 
-        // to do the same thing - need to research further. 
-        // (note: overlap used in call to hitPipe function previously)
-        //Each time the bird collides with a pipe fall off screen
+        //Each time the bird collides with a collision item fall off screen
         game.physics.arcade.overlap(
             this.bird, this.naturalItems, this.collectNaturalItem, null, this);
 
-        // Each time the bird collects and item
+        // Each time the bird collects an item
         game.physics.arcade.collide(
-            this.bird, this.collectionItems, this.collectItem, null, this);   
+            this.bird, this.collectionItems, this.collectItem, null, this); 
+
+        // Each time the bird collides with collistion item
+        game.physics.arcade.collide(
+            this.bird, this.collisionItems, this.hitCollisionItem, null, this);  
     },
 
     // Make the bird jump 
