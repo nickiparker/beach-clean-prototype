@@ -1,0 +1,4 @@
+# Ignore the following for git commits 
+
+.DS_Store
+assets/.DS_Store
