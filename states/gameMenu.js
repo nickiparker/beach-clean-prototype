@@ -1,0 +1,70 @@
+var GameMenu = function() {};
+
+GameMenu.prototype = {
+
+  menuConfig: {
+    startY: 260,
+    startX: 30
+  },
+
+  init: function () {
+    this.titleText = game.make.text(game.world.centerX, 200, "Help clean \n the beach!", {
+      font: 'bold 30pt TheMinion',
+      fill: '#FDFFB5',
+      align: 'center'
+    });
+    this.titleText.setShadow(3, 3, 'rgba(0,0,0,0.5)', 5);
+    this.titleText.anchor.set(0.5);
+    this.optionCount = 1;
+  },
+
+  addMenuOption: function(text, callback) {
+    var optionStyle = { font: '25pt TheMinion', fill: 'white', align: 'left', stroke: 'rgba(0,0,0,0)', strokeThickness: 4};
+    var txt = game.add.text(game.world.centerX, (this.optionCount * 80) + 300, text, optionStyle);
+    txt.anchor.setTo(0.5);
+    txt.stroke = "rgba(0,0,0,0)";
+    txt.strokeThickness = 4;
+    var onOver = function (target) {
+      target.fill = "#FEFFD5";
+      target.stroke = "rgba(200,200,200,0.5)";
+      txt.useHandCursor = true;
+    };
+    var onOut = function (target) {
+      target.fill = "white";
+      target.stroke = "rgba(0,0,0,0)";
+      txt.useHandCursor = false;
+    };
+    //txt.useHandCursor = true;
+    txt.inputEnabled = true;
+    txt.events.onInputUp.add(callback, this);
+    txt.events.onInputOver.add(onOver, this);
+    txt.events.onInputOut.add(onOut, this);
+
+    this.optionCount ++;
+  },
+
+  create: function () {
+    if (music.name !== "mainSoundTrack" && playMusic) {
+      music.stop();
+      music = game.add.audio('mainSoundTrack');
+      music.loop = true;
+      music.play();
+    }
+    game.stage.disableVisibilityChange = true;
+    game.stage.backgroundColor = "#00b6ba";
+    //game.add.sprite(0, 0, 'menu-bg');
+    game.add.existing(this.titleText);
+
+    this.addMenuOption('Start', function (e) {
+      game.state.start("Game");
+    });
+    this.addMenuOption('Options', function (e) {
+      game.state.start("Options");
+    });
+    this.addMenuOption('Mission', function (e) {
+      game.state.start("Mission");
+    });
+  }
+};
+
+Phaser.Utils.mixinPrototype(GameMenu.prototype, mixins);
