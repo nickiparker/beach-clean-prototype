@@ -35,7 +35,12 @@ Game.prototype = {
         
         // Load the bird sprite
         game.load.image('bird', 'assets/images/seagull.png');
-        game.load.audio('jump', 'assets/jump.wav');
+        
+        // Load sounds
+        game.load.audio('jump', 'assets/sound effects/seagull-flapping-short-quieter.wav');
+        game.load.audio('collision', 'assets/sound effects/seagull-hit-obstacle.wav');
+        game.load.audio('collect', 'assets/sound effects/collecting-items.wav');
+        game.load.audio('natural', 'assets/sound effects/seagull-swalk-high-pitch.wav');
 
         // Load background
         game.load.image('bg', 'assets/images/background.png'); 
@@ -62,9 +67,12 @@ Game.prototype = {
         // Change the background color of the game to orange
         game.stage.backgroundColor = '#f49b42';
 
-        //Add sound into game
+        // Add sound into game
         if (gameOptions.playSound){
             this.jumpSound = game.add.audio('jump');
+            this.collisionSound = game.add.audio('collision');
+            this.collectSound = game.add.audio('collect');
+            this.naturalSound = game.add.audio('natural');
         }
 
         // Add in score to display top left
@@ -163,11 +171,16 @@ Game.prototype = {
     collectItem: function(bird, collectionItem) {
         collectionItem.kill();
         this.collectionItems.remove(collectionItem);
+
+        // Make a sound for the collect
+        if (gameOptions.playSound){
+            this.collectSound.play();
+        }
+
         // update score
         this.score += 1;
         this.labelScore.text = "Score: " + this.score;
     },
-
 
     // Avoid natural items (seaweed and fish etc)
     // -- score penalised
@@ -214,6 +227,12 @@ Game.prototype = {
     collectNaturalItem: function(bird, naturalItem) {
         naturalItem.kill();
         this.naturalItems.remove(naturalItem);
+
+        // Make a sound for the natural items
+        if (gameOptions.playSound){
+            this.naturalSound.play();
+        }
+
         // update score - penalise by 2 points
         if (this.score > 1){
             this.score -= 2;
@@ -275,6 +294,11 @@ Game.prototype = {
         // It means the bird is already falling off the screen
         if (this.bird.alive == false)
             return;
+
+        // Make a sound for the collision
+        if (gameOptions.playSound){
+            this.collisionSound.play();
+        }
 
         // Set the alive property of the bird to false
         this.bird.alive = false;

@@ -15,7 +15,7 @@ Splash.prototype = {
 
   loadMusic: function () {
     // credit to Kevin Macleod at http://incompetech.com/
-    game.load.audio('mainSoundTrack', 'assets/music/Exit the Premises.mp3');
+    game.load.audio('mainSoundTrack', 'assets/sound effects/seaside-faster.wav');
   },
   // Load background images - currently using colours instead of images
   // loadImages: function () {
