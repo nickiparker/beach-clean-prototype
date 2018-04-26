@@ -318,7 +318,7 @@ Game.prototype = {
         // This function is called 60 times per second    
         // It contains the game's logic
         // background parallax - makes the background slowly move by 0.5 of a pixel on update 
-        game.bg.tilePosition.x += 0.5;
+        game.bg.tilePosition.x -= 0.5;
 
         // If the bird is out of the screen (too high or too low)
         // Call the 'restartGame' function
