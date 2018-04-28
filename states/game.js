@@ -4,6 +4,10 @@ var Game = function(game) {};
 var collectionTypes = [];
 var naturalTypes = [];
 var finalScore = 0;
+var finalCans = 0;
+var finalBuckets = 0;
+var finalNets = 0;
+var finalBottles = 0;
 
 Game.prototype = {
     
@@ -74,6 +78,12 @@ Game.prototype = {
             this.collectSound = game.add.audio('collect');
             this.naturalSound = game.add.audio('natural');
         }
+
+        // Add individual item totals
+        this.cans = 0;
+        this.nets = 0;
+        this.buckets = 0;
+        this.bottles = 0;
 
         // Add in score to display top left
         this.score = 0;
@@ -169,6 +179,16 @@ Game.prototype = {
     },
 
     collectItem: function(bird, collectionItem) {
+        if (collectionItem.key == "bottle"){
+            this.bottles += 1;
+        } else if (collectionItem.key == "bucket"){
+            this.buckets += 1;
+        } else if (collectionItem.key == "can"){
+            this.cans += 1;
+        } else {
+            this.nets += 1;
+        }
+
         collectionItem.kill();
         this.collectionItems.remove(collectionItem);
 
@@ -356,6 +376,10 @@ Game.prototype = {
     // Restart the game
     restartGame: function() {
         // Start the 'GameOver' state, which brings the gameover page
+        finalCans = this.cans;
+        finalBuckets = this.buckets;
+        finalNets = this.nets;
+        finalBottles = this.bottles;
         finalScore = this.score;
         game.state.start('GameOver');
     },
