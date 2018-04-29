@@ -64,6 +64,13 @@ GameMenu.prototype = {
     //game.add.sprite(0, 0, 'menu-bg');
     game.add.existing(this.titleText);
 
+    // start the game when the spacekey is hit
+    var spaceKey = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
+    spaceKey.onDown.add(this.startGame, this);
+
+    // start game with a tap
+    game.input.onTap.add(this.startGame, this);
+
     // add menu
     this.addMenuOption('Mission', function (e) {
       game.state.start("Mission");
