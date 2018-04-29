@@ -137,13 +137,13 @@ GameOver.prototype = {
     //message, width and height
 
     if (infoType == "can"){
-      this.showInfoBox("It is estimated that \n 6.4 million tonnes of \n litter enter the \n sea annually.");
+      this.showInfoBox("\nIt is estimated that\n6.4 million tonnes of litter enter the\nsea annually.");
     } else if (infoType == "net"){
-      this.showInfoBox("It’s estimated that \n over 100,000 animals \n and birds die every \n year from entanglement or ingestion \n of discarded items such \n as marine debris.");
+      this.showInfoBox("It’s estimated that over 100,000 animals and birds die every year from entanglement\nor ingestion of discarded items such\nas marine debris.");
     } else if (infoType == "bucket"){
-      this.showInfoBox("On average there \n are 46,000 pieces of plastic \n floating in every \n square mile of ocean.");
+      this.showInfoBox("On average there are 46,000 pieces of plastic floating in every square mile of ocean.");
     } else {
-      this.showInfoBox("A plastic bottle \n left on the beach can \n last for more than 450 years \n within the marine environment.");
+      this.showInfoBox("A plastic bottle left on the beach can last for more than 450 years within the marine environment.");
     }
     
   },
@@ -152,9 +152,12 @@ GameOver.prototype = {
   showInfoBox(text, w = 355, h = 647) {
 
     var messageStyle = {
-      font: '18pt ubuntu',
-      fill: '#333',
-      align: 'center'
+      font: '17pt ubuntu',
+      fill: '#3e4e50',
+      align: 'center',
+      wordWrap: 'true',
+      wordWrapWidth: 255
+      //boundsAlignV: 'center'
     };
 
     //just in case the message box already exists
@@ -171,25 +174,22 @@ GameOver.prototype = {
       //make a text field
       var text1 = game.add.text(0, 0, text, messageStyle);
       //set the textfeild to wrap if the text is too long
-      text1.wordWrap = true;
+      //text1.wordWrap = true;
       //make the width of the wrap 90% of the width 
       //of the message box
-      text1.wordWrapWidth = w * .9;
+      //text1.wordWrapWidth = w * .9;
       //text1.padding.set(60,0);
-      //
-      //
+
       //set the width and height passed
       //in the parameters
       back.width = w;
       back.height = h;
-      //
-      //
-      //
+
       //add the elements to the group
       msgBox.add(back);
       msgBox.add(closeButton);
       msgBox.add(text1);
-      //
+
       //set the close button
       //in the center horizontally
       //and near the bottom of the box vertically
@@ -199,15 +199,15 @@ GameOver.prototype = {
       closeButton.inputEnabled = true;
       //add a listener to destroy the box when the button is pressed
       closeButton.events.onInputDown.add(this.hideBox, this);
-      //
-      //
+      
       //set the message box in the center of the screen
       msgBox.x = game.width / 2 - msgBox.width / 2;
       msgBox.y = game.height / 2 - msgBox.height / 2;
-      //
-      //set the text in the middle of the message box
+     
+      //set the text in the middle of the message box 
+      // - adjusting for title banner
       text1.x = back.width / 2 - text1.width / 2;
-      text1.y = back.height / 2 - text1.height / 2;
+      text1.y = (back.height + 80) / 2 - text1.height / 2;
       //make a state reference to the messsage box
       this.msgBox = msgBox;
   },
