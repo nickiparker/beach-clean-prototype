@@ -44,8 +44,8 @@ GameOver.prototype = {
     var titleStyle = { font: '30pt ubuntu', fill: '#FDFFB5', align: 'center'};
     var scoreStyle = { font: '18pt ubuntu', fill: '#FDFFB5', align: 'center'};
     var totalStyle = { font: '15pt ubuntu', fill: '#3e4e50', align: 'center'};
-    var title = game.add.text(game.world.centerX, 100, "Game Over", titleStyle);
-    var scoreTitle = game.add.text(game.world.centerX, 190, "Game Score: " + finalScore, scoreStyle);
+    var title = game.add.text(game.world.centerX, 120, "Game Over", titleStyle);
+    var scoreTitle = game.add.text(game.world.centerX, 180, "Game Score: " + finalScore, scoreStyle);
     //var nets = game.add.text(game.world.centerX, 250, finalNets, scoreStyle);
 
     // first row of collection
@@ -119,6 +119,7 @@ GameOver.prototype = {
     bucketTotal.inputEnabled=true;
     bucketTotal.events.onInputDown.add(this.infoPopup, this, 0, "bucket");
 
+    scoreTitle.setShadow(1, 1, 'rgba(0,0,0,0.5)', 5);
     title.setShadow(3, 3, 'rgba(0,0,0,0.5)', 5);
     title.anchor.set(0.5);
     scoreTitle.anchor.set(0.5);
