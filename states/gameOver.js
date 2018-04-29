@@ -6,7 +6,8 @@ GameOver.prototype = {
     this.optionCount = 1;
 
     //add background image for pop up
-    game.load.image('pop-up',  'assets/images/pop-up-background.png')
+    game.load.image('pop-up',  'assets/images/pop-up-background.png');
+    game.load.image('gameOverBg', 'assets/images/game-over-background.png');
   },
 
   addMenuOption: function(text, callback) {
@@ -37,20 +38,31 @@ GameOver.prototype = {
   create: function () {
     //game.stage.backgroundColor = "#f78154";
     //add game over background
-    game.gameOverBg = game.add.sprite(0, 0, 'bg');
+    game.gameOverBg = game.add.sprite(0, 0, 'gameOverBg');
+
     //game.add.sprite(0, 0, 'gameover-bg');
     var titleStyle = { font: '30pt ubuntu', fill: '#FDFFB5', align: 'center'};
     var scoreStyle = { font: '18pt ubuntu', fill: '#FDFFB5', align: 'center'};
-    var totalStyle = { font: '18pt ubuntu', fill: '#FDFFB5', align: 'center'};
+    var totalStyle = { font: '15pt ubuntu', fill: '#3e4e50', align: 'center'};
     var title = game.add.text(game.world.centerX, 100, "Game Over", titleStyle);
     var scoreTitle = game.add.text(game.world.centerX, 190, "Game Score: " + finalScore, scoreStyle);
     //var nets = game.add.text(game.world.centerX, 250, finalNets, scoreStyle);
 
+    // first row of collection
     // Add individual totals and sprites for each
-    var netSprite = game.add.sprite(-70, -10, 'net');
-    netSprite.scale.setTo(0.18,0.18);
-    var netTotal = game.add.text(160, 280, finalNets, totalStyle);
+    // add net shadow
+    shadowNet = game.add.sprite(-58, -8, 'net');
+    shadowNet.scale.setTo(0.16,0.16);
+    shadowNet.tint = 0x000000;
+    shadowNet.alpha = 0.5;
+    
+    // add net
+    var netSprite = game.add.sprite(-60, -10, 'net');
+    netSprite.scale.setTo(0.16,0.16);
+    var netTotal = game.add.text(155, 290, finalNets, totalStyle);
+    netTotal.addChild(shadowNet);
     netTotal.addChild(netSprite);
+    
     // Add a click event onto net item total 
     netTotal.inputEnabled=true;
 
@@ -58,25 +70,36 @@ GameOver.prototype = {
     // workaround for 'closure' (javascript feature)
     netTotal.events.onInputDown.add(this.infoPopup, this, 0, "net");  
    
-    var bottleSprite = game.add.sprite(-70, -10, 'bottle');
-    bottleSprite.scale.setTo(0.18,0.18);
-    var bottleTotal = game.add.text(270, 280, finalBottles, totalStyle);
+    // add bottle shadow
+    shadowBottle = game.add.sprite(-58, -8, 'bottle');
+    shadowBottle.scale.setTo(0.16,0.16);
+    shadowBottle.tint = 0x000000;
+    shadowBottle.alpha = 0.5;
+
+    // add bottle
+    var bottleSprite = game.add.sprite(-60, -10, 'bottle');
+    bottleSprite.scale.setTo(0.16,0.16);
+    var bottleTotal = game.add.text(265, 290, finalBottles, totalStyle);
+    bottleTotal.addChild(shadowBottle);
     bottleTotal.addChild(bottleSprite);
     // Add a click event onto bottle item total 
     bottleTotal.inputEnabled=true;
     bottleTotal.events.onInputDown.add(this.infoPopup, this, 0, "bottle");
 
-    var canSprite = game.add.sprite(-70, -10, 'can');
-    canSprite.scale.setTo(0.18,0.18);
-    var canTotal = game.add.text(160, 350, finalCans, totalStyle);
+    // second row of collections
+    // add can
+    var canSprite = game.add.sprite(-60, -10, 'can');
+    canSprite.scale.setTo(0.16,0.16);
+    var canTotal = game.add.text(155, 350, finalCans, totalStyle);
     canTotal.addChild(canSprite);
     // Add a click event onto can item total 
     canTotal.inputEnabled=true;
     canTotal.events.onInputDown.add(this.infoPopup, this, 0, "can");
 
-    var bucketSprite = game.add.sprite(-70, -10, 'bucket');
-    bucketSprite.scale.setTo(0.18,0.18);
-    var bucketTotal = game.add.text(270, 350, finalBuckets, totalStyle);
+    // add bucket
+    var bucketSprite = game.add.sprite(-60, -10, 'bucket');
+    bucketSprite.scale.setTo(0.16,0.16);
+    var bucketTotal = game.add.text(265, 350, finalBuckets, totalStyle);
     bucketTotal.addChild(bucketSprite);
     // Add a click event onto bucket item total 
     bucketTotal.inputEnabled=true;
