@@ -15,7 +15,7 @@ Splash.prototype = {
 
   loadMusic: function () {
     // credit to Kevin Macleod at http://incompetech.com/
-    game.load.audio('mainSoundTrack', 'assets/sound effects/seaside-faster.wav');
+    game.load.audio('mainSoundTrack', 'assets/sound effects/background-wave-seagull-sounds.wav');
   },
   // Load background images - currently using colours instead of images
   // loadImages: function () {
@@ -68,6 +68,7 @@ Splash.prototype = {
 
   addGameMusic: function () {
     music = game.add.audio('mainSoundTrack');
+    music.volume = 0.3;
     music.loop = true;
     music.play();
   },

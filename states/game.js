@@ -195,6 +195,8 @@ Game.prototype = {
         // Make a sound for the collect
         if (gameOptions.playSound){
             this.collectSound.play();
+            // without this the volume of music resets itself to max?
+            music.volume = 0.3;
         }
 
         // update score

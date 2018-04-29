@@ -28,7 +28,7 @@ Options.prototype = {
     this.addMenuOption(playMusic ? 'Mute Music' : 'Play Music', function (target) {
       playMusic = !playMusic;
       target.text = playMusic ? 'Mute Music' : 'Play Music';
-      music.volume = playMusic ? 1 : 0;
+      music.volume = playMusic ? 0.3 : 0;
     });
     this.addMenuOption(playSound ? 'Mute Sound' : 'Play Sound', function (target) {
       playSound = !playSound;
