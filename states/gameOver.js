@@ -57,9 +57,9 @@ GameOver.prototype = {
     shadowNet.alpha = 0.5;
     
     // add net
-    var netSprite = game.add.sprite(-60, -10, 'net');
+    var netSprite = game.add.sprite(-60, -8, 'net');
     netSprite.scale.setTo(0.16,0.16);
-    var netTotal = game.add.text(155, 290, finalNets, totalStyle);
+    var netTotal = game.add.text(155, 292, finalNets, totalStyle);
     netTotal.addChild(shadowNet);
     netTotal.addChild(netSprite);
     
@@ -77,9 +77,9 @@ GameOver.prototype = {
     shadowBottle.alpha = 0.5;
 
     // add bottle
-    var bottleSprite = game.add.sprite(-60, -10, 'bottle');
+    var bottleSprite = game.add.sprite(-60, -11, 'bottle');
     bottleSprite.scale.setTo(0.16,0.16);
-    var bottleTotal = game.add.text(265, 290, finalBottles, totalStyle);
+    var bottleTotal = game.add.text(265, 292, finalBottles, totalStyle);
     bottleTotal.addChild(shadowBottle);
     bottleTotal.addChild(bottleSprite);
     // Add a click event onto bottle item total 
@@ -87,19 +87,33 @@ GameOver.prototype = {
     bottleTotal.events.onInputDown.add(this.infoPopup, this, 0, "bottle");
 
     // second row of collections
+    // add can shadow
+    shadowCan = game.add.sprite(-58, -8, 'can');
+    shadowCan.scale.setTo(0.16,0.16);
+    shadowCan.tint = 0x000000;
+    shadowCan.alpha = 0;
+
     // add can
-    var canSprite = game.add.sprite(-60, -10, 'can');
+    var canSprite = game.add.sprite(-60, -11, 'can');
     canSprite.scale.setTo(0.16,0.16);
-    var canTotal = game.add.text(155, 350, finalCans, totalStyle);
+    var canTotal = game.add.text(155, 352, finalCans, totalStyle);
+    canTotal.addChild(shadowCan);
     canTotal.addChild(canSprite);
     // Add a click event onto can item total 
     canTotal.inputEnabled=true;
     canTotal.events.onInputDown.add(this.infoPopup, this, 0, "can");
 
+    // add bucket shadow
+    shadowBucket = game.add.sprite(-58, -8, 'bucket');
+    shadowBucket.scale.setTo(0.16,0.16);
+    shadowBucket.tint = 0x000000;
+    shadowBucket.alpha = 0;
+
     // add bucket
-    var bucketSprite = game.add.sprite(-60, -10, 'bucket');
+    var bucketSprite = game.add.sprite(-60, -11, 'bucket');
     bucketSprite.scale.setTo(0.16,0.16);
-    var bucketTotal = game.add.text(265, 350, finalBuckets, totalStyle);
+    var bucketTotal = game.add.text(265, 352, finalBuckets, totalStyle);
+    bucketTotal.addChild(shadowBucket);
     bucketTotal.addChild(bucketSprite);
     // Add a click event onto bucket item total 
     bucketTotal.inputEnabled=true;
