@@ -11,17 +11,17 @@ GameOver.prototype = {
 
   addMenuOption: function(text, callback) {
     var optionStyle = { font: '25pt ubuntu', fill: 'white', align: 'left', stroke: 'rgba(0,0,0,0)', strokeThickness: 4};
-    var txt = game.add.text(game.world.centerX, (this.optionCount * 80) + 370, text, optionStyle);
+    var txt = game.add.text(game.world.centerX, (this.optionCount * 60) + 450, text, optionStyle);
     txt.anchor.setTo(0.5);
     txt.stroke = "rgba(0,0,0,0)";
-    txt.strokeThickness = 4;
+    txt.setShadow(2, 2, 'rgba(0,0,0,0.6)', 5);
     var onOver = function (target) {
-      target.fill = "#FEFFD5";
-      target.stroke = "rgba(200,200,200,0.5)";
+      target.fill = "#fff";
+      target.stroke = "rgba(0,0,0,0.1)";
       txt.useHandCursor = true;
     };
     var onOut = function (target) {
-      target.fill = "white";
+      target.fill = "#fff";
       target.stroke = "rgba(0,0,0,0)";
       txt.useHandCursor = false;
     };
@@ -35,7 +35,9 @@ GameOver.prototype = {
   },
 
   create: function () {
-    game.stage.backgroundColor = "#C1666B";
+    //game.stage.backgroundColor = "#f78154";
+    //add game over background
+    game.gameOverBg = game.add.sprite(0, 0, 'bg');
     //game.add.sprite(0, 0, 'gameover-bg');
     var titleStyle = { font: '30pt ubuntu', fill: '#FDFFB5', align: 'center'};
     var scoreStyle = { font: '18pt ubuntu', fill: '#FDFFB5', align: 'center'};
@@ -45,9 +47,9 @@ GameOver.prototype = {
     //var nets = game.add.text(game.world.centerX, 250, finalNets, scoreStyle);
 
     // Add individual totals and sprites for each
-    var netSprite = game.add.sprite(-25, -80, 'net');
-    netSprite.scale.setTo(0.2,0.2);
-    var netTotal = game.add.text(60, 320, finalNets, totalStyle);
+    var netSprite = game.add.sprite(-70, -10, 'net');
+    netSprite.scale.setTo(0.18,0.18);
+    var netTotal = game.add.text(160, 280, finalNets, totalStyle);
     netTotal.addChild(netSprite);
     // Add a click event onto net item total 
     netTotal.inputEnabled=true;
@@ -56,25 +58,25 @@ GameOver.prototype = {
     // workaround for 'closure' (javascript feature)
     netTotal.events.onInputDown.add(this.infoPopup, this, 0, "net");  
    
-    var bottleSprite = game.add.sprite(-25, -80, 'bottle');
-    bottleSprite.scale.setTo(0.2,0.2);
-    var bottleTotal = game.add.text(140, 320, finalBottles, totalStyle);
+    var bottleSprite = game.add.sprite(-70, -10, 'bottle');
+    bottleSprite.scale.setTo(0.18,0.18);
+    var bottleTotal = game.add.text(270, 280, finalBottles, totalStyle);
     bottleTotal.addChild(bottleSprite);
     // Add a click event onto bottle item total 
     bottleTotal.inputEnabled=true;
     bottleTotal.events.onInputDown.add(this.infoPopup, this, 0, "bottle");
 
-    var canSprite = game.add.sprite(-25, -80, 'can');
-    canSprite.scale.setTo(0.2,0.2);
-    var canTotal = game.add.text(220, 320, finalCans, totalStyle);
+    var canSprite = game.add.sprite(-70, -10, 'can');
+    canSprite.scale.setTo(0.18,0.18);
+    var canTotal = game.add.text(160, 350, finalCans, totalStyle);
     canTotal.addChild(canSprite);
     // Add a click event onto can item total 
     canTotal.inputEnabled=true;
     canTotal.events.onInputDown.add(this.infoPopup, this, 0, "can");
 
-    var bucketSprite = game.add.sprite(-25, -80, 'bucket');
-    bucketSprite.scale.setTo(0.2,0.2);
-    var bucketTotal = game.add.text(300, 320, finalBuckets, totalStyle);
+    var bucketSprite = game.add.sprite(-70, -10, 'bucket');
+    bucketSprite.scale.setTo(0.18,0.18);
+    var bucketTotal = game.add.text(270, 350, finalBuckets, totalStyle);
     bucketTotal.addChild(bucketSprite);
     // Add a click event onto bucket item total 
     bucketTotal.inputEnabled=true;

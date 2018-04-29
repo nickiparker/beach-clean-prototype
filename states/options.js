@@ -22,7 +22,7 @@ Options.prototype = {
     var playSound = gameOptions.playSound,
         playMusic = gameOptions.playMusic;
 
-    game.stage.backgroundColor = "#00b6ba";
+    game.stage.backgroundColor = "#60d394";
     //game.add.sprite(0, 0, 'options-bg');
     game.add.existing(this.titleText);
     this.addMenuOption(playMusic ? 'Mute Music' : 'Play Music', function (target) {
