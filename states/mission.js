@@ -8,8 +8,8 @@ Mission.prototype = {
   },
 
   addMission: function(task, author) {
-    var authorStyle = { font: '20pt TheMinion', fill: 'white', align: 'center', stroke: 'rgba(0,0,0,0)', strokeThickness: 4};
-    var taskStyle = { font: '13.5pt TheMinion', fill: 'white', align: 'center', stroke: 'rgba(0,0,0,0)', strokeThickness: 4};
+    var authorStyle = { font: '20pt ubuntu', fill: 'white', align: 'center', stroke: 'rgba(0,0,0,0)', strokeThickness: 4};
+    var taskStyle = { font: '13.5pt ubuntu', fill: 'white', align: 'center', stroke: 'rgba(0,0,0,0)', strokeThickness: 4};
     if (author == "Beach Clean Mission") {
       var authorText = game.add.text(game.world.centerX, 400, author, authorStyle);
       var taskText = game.add.text(game.world.centerX, 500, task, taskStyle);
@@ -30,7 +30,7 @@ Mission.prototype = {
   },
 
   addMenuOption: function(text, callback) {
-    var optionStyle = { font: '20pt TheMinion', fill: 'white', align: 'left', stroke: 'rgba(0,0,0,0)', srokeThickness: 4};
+    var optionStyle = { font: '20pt ubuntu', fill: 'white', align: 'left', stroke: 'rgba(0,0,0,0)', srokeThickness: 4};
     var txt = game.add.text(game.world.centerX, (this.optionCount * 80) + 500, text, optionStyle);
 
     txt.stroke = "rgba(0,0,0,0";

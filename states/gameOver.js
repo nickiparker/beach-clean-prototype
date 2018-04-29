@@ -10,7 +10,7 @@ GameOver.prototype = {
   },
 
   addMenuOption: function(text, callback) {
-    var optionStyle = { font: '25pt TheMinion', fill: 'white', align: 'left', stroke: 'rgba(0,0,0,0)', strokeThickness: 4};
+    var optionStyle = { font: '25pt ubuntu', fill: 'white', align: 'left', stroke: 'rgba(0,0,0,0)', strokeThickness: 4};
     var txt = game.add.text(game.world.centerX, (this.optionCount * 80) + 370, text, optionStyle);
     txt.anchor.setTo(0.5);
     txt.stroke = "rgba(0,0,0,0)";
@@ -37,9 +37,9 @@ GameOver.prototype = {
   create: function () {
     game.stage.backgroundColor = "#C1666B";
     //game.add.sprite(0, 0, 'gameover-bg');
-    var titleStyle = { font: 'bold 30pt TheMinion', fill: '#FDFFB5', align: 'center'};
-    var scoreStyle = { font: '18pt TheMinion', fill: '#FDFFB5', align: 'center'};
-    var totalStyle = { font: '18pt TheMinion', fill: '#FDFFB5', align: 'center'};
+    var titleStyle = { font: '30pt ubuntu', fill: '#FDFFB5', align: 'center'};
+    var scoreStyle = { font: '18pt ubuntu', fill: '#FDFFB5', align: 'center'};
+    var totalStyle = { font: '18pt ubuntu', fill: '#FDFFB5', align: 'center'};
     var title = game.add.text(game.world.centerX, 100, "Game Over", titleStyle);
     var scoreTitle = game.add.text(game.world.centerX, 190, "Game Score: " + finalScore, scoreStyle);
     //var nets = game.add.text(game.world.centerX, 250, finalNets, scoreStyle);
@@ -112,7 +112,7 @@ GameOver.prototype = {
   showInfoBox(text, w = 355, h = 647) {
 
     var messageStyle = {
-      font: 'bold 18pt TheMinion',
+      font: '18pt ubuntu',
       fill: '#333',
       align: 'center'
     };

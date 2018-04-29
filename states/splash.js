@@ -27,8 +27,8 @@ Splash.prototype = {
   loadFonts: function () {
     WebFontConfig = {
       custom: {
-        families: ['TheMinion'],
-        urls: ['assets/styles/theminion.css']
+        families: ['ubuntu'],
+        urls: ['assets/styles/ubuntu.css']
       }
     }
   },

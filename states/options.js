@@ -10,7 +10,7 @@ Options.prototype = {
 
   init: function () {
     this.titleText = game.make.text(game.world.centerX, 200, "Options", {
-      font: 'bold 30pt TheMinion',
+      font: '30pt ubuntu',
       fill: '#FDFFB5',
       align: 'center'
     });

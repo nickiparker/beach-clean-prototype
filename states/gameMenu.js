@@ -7,25 +7,29 @@ GameMenu.prototype = {
     startX: 30
   },
 
+  preload: function () {
+    game.load.image('menu-bg', 'assets/images/main-menu-background.png');
+  },
+
   init: function () {
-    this.titleText = game.make.text(game.world.centerX, 200, "Help clean \n the beach!", {
-      font: 'bold 30pt TheMinion',
-      fill: '#FDFFB5',
+    this.titleText = game.make.text(game.world.centerX, 110, "HELP CLEAN\nTHE BEACH!", {
+      font: '35pt ubuntu',
+      fill: '#3e4e50',
       align: 'center'
     });
-    this.titleText.setShadow(3, 3, 'rgba(0,0,0,0.5)', 5);
+    //this.titleText.setShadow(3, 3, 'rgba(0,0,0,0.5)', 5);
     this.titleText.anchor.set(0.5);
     this.optionCount = 1;
   },
 
   addMenuOption: function(text, callback) {
-    var optionStyle = { font: '25pt TheMinion', fill: 'white', align: 'left', stroke: 'rgba(0,0,0,0)', strokeThickness: 4};
-    var txt = game.add.text(game.world.centerX, (this.optionCount * 80) + 300, text, optionStyle);
+    var optionStyle = { font: '25pt ubuntu', fill: 'white', align: 'left', stroke: 'rgba(0,0,0,0)', strokeThickness: 4};
+    var txt = game.add.text(game.world.centerX, (this.optionCount * 60) + 400, text, optionStyle);
     txt.anchor.setTo(0.5);
     txt.stroke = "rgba(0,0,0,0)";
     txt.strokeThickness = 4;
     var onOver = function (target) {
-      target.fill = "#FEFFD5";
+      target.fill = "#3e92cc";
       target.stroke = "rgba(200,200,200,0.5)";
       txt.useHandCursor = true;
     };
@@ -51,19 +55,26 @@ GameMenu.prototype = {
       music.play();
     }
     game.stage.disableVisibilityChange = true;
-    game.stage.backgroundColor = "#00b6ba";
+
+    //adding background image to main menu
+    game.menuBg = game.add.sprite(0, 0, 'menu-bg');
+ 
+    //game.stage.backgroundColor = "#00b6ba";
+
     //game.add.sprite(0, 0, 'menu-bg');
     game.add.existing(this.titleText);
 
-    this.addMenuOption('Start', function (e) {
-      game.state.start("Game");
+    // add menu
+    this.addMenuOption('Mission', function (e) {
+      game.state.start("Mission");
     });
     this.addMenuOption('Options', function (e) {
       game.state.start("Options");
     });
-    this.addMenuOption('Mission', function (e) {
-      game.state.start("Mission");
-    });
+  },
+
+  startGame: function () {
+    game.state.start("Game");
   }
 };
 
