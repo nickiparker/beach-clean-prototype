@@ -24,7 +24,7 @@ GameMenu.prototype = {
 
   addMenuOption: function(text, callback) {
     var optionStyle = { font: '25pt ubuntu', fill: 'white', align: 'left', stroke: 'rgba(0,0,0,0)', strokeThickness: 4};
-    var txt = game.add.text(game.world.centerX, (this.optionCount * 60) + 430, text, optionStyle);
+    var txt = game.add.text(game.world.centerX, (this.optionCount * 60) + 410, text, optionStyle);
     txt.anchor.setTo(0.5);
     txt.stroke = "rgba(0,0,0,0)";
     txt.setShadow(2, 2, 'rgba(0,0,0,0.6)', 5);
@@ -69,13 +69,16 @@ GameMenu.prototype = {
     game.add.existing(this.titleText);
 
     // start the game when the spacekey is hit
-    var spaceKey = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
-    spaceKey.onDown.add(this.startGame, this);
+    // var spaceKey = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
+    // spaceKey.onDown.add(this.startGame, this);
 
-    // start game with a tap
-    game.input.onTap.add(this.startGame, this);
+    // // start game with a tap
+    // game.input.onTap.add(this.startGame, this);
 
     // add menu
+    this.addMenuOption('Play', function (e) {
+      game.state.start("Game");
+    });
     this.addMenuOption('Mission', function (e) {
       game.state.start("Mission");
     });
