@@ -8,42 +8,43 @@ Mission.prototype = {
     this.creditCount = 0;
   },
 
-  addMission: function(task, author) {
-    var authorStyle = { font: '20pt ubuntu', fill: 'white', align: 'center', stroke: 'rgba(0,0,0,0)', strokeThickness: 4};
-    var taskStyle = { font: '13.5pt ubuntu', fill: 'white', align: 'center', stroke: 'rgba(0,0,0,0)', strokeThickness: 4};
-    if (author == "Beach Clean Mission") {
-      var authorText = game.add.text(game.world.centerX, 400, author, authorStyle);
-      var taskText = game.add.text(game.world.centerX, 500, task, taskStyle);
-    } else {
-      var authorText = game.add.text(game.world.centerX, 700, author, authorStyle);
-      var taskText = game.add.text(game.world.centerX, 750, task, taskStyle);
-    }
+  // addMission: function(task, author) {
+  //   var authorStyle = { font: '20pt ubuntu', fill: 'white', align: 'center', stroke: 'rgba(0,0,0,0)', strokeThickness: 4};
+  //   var taskStyle = { font: '13.5pt ubuntu', fill: 'white', align: 'center', stroke: 'rgba(0,0,0,0)', strokeThickness: 4};
+  //   if (author == "Beach Clean Mission") {
+  //     var authorText = game.add.text(game.world.centerX, 400, author, authorStyle);
+  //     var taskText = game.add.text(game.world.centerX, 500, task, taskStyle);
+  //   } else {
+  //     var authorText = game.add.text(game.world.centerX, 700, author, authorStyle);
+  //     var taskText = game.add.text(game.world.centerX, 750, task, taskStyle);
+  //   }
     
-    authorText.anchor.setTo(0.5);
-    authorText.stroke = "rgba(0,0,0,0)";
-    authorText.strokeThickness = 4;
-    taskText.anchor.setTo(0.5);
-    taskText.stroke = "rgba(0,0,0,0)";
-    taskText.strokeThickness = 4;
-    game.add.tween(authorText).to( { y: -300 }, 20000, Phaser.Easing.Cubic.Out, true, this.creditCount * 10000);
-    game.add.tween(taskText).to( { y: -200 }, 20000, Phaser.Easing.Cubic.Out, true, this.creditCount * 10000);
-    this.creditCount ++;
-  },
+  //   authorText.anchor.setTo(0.5);
+  //   authorText.stroke = "rgba(0,0,0,0)";
+  //   authorText.strokeThickness = 4;
+  //   taskText.anchor.setTo(0.5);
+  //   taskText.stroke = "rgba(0,0,0,0)";
+  //   taskText.strokeThickness = 4;
+  //   game.add.tween(authorText).to( { y: -300 }, 20000, Phaser.Easing.Cubic.Out, true, this.creditCount * 10000);
+  //   game.add.tween(taskText).to( { y: -200 }, 20000, Phaser.Easing.Cubic.Out, true, this.creditCount * 10000);
+  //   this.creditCount ++;
+  // },
 
   addMenuOption: function(text, callback) {
-    var optionStyle = { font: '20pt ubuntu', fill: 'white', align: 'left', stroke: 'rgba(0,0,0,0)', srokeThickness: 4};
-    var txt = game.add.text(game.world.centerX, (this.optionCount * 80) + 500, text, optionStyle);
-
-    txt.stroke = "rgba(0,0,0,0";
-    txt.strokeThickness = 4;
+    var optionStyle = { font: '25pt ubuntu', fill: 'white', align: 'left', stroke: 'rgba(0,0,0,0)', srokeThickness: 4};
+    var txt = game.add.text(game.world.centerX, (this.optionCount * 60) + 500, text, optionStyle);
     txt.anchor.setTo(0.5);
+    txt.stroke = "rgba(0,0,0,0";
+    txt.setShadow(2, 2, 'rgba(0,0,0,0.6)', 5);
+    //txt.strokeThickness = 4;
+
     var onOver = function (target) {
-      target.fill = "#FEFFD5";
-      target.stroke = "rgba(200,200,200,0.5)";
+      target.fill = "#fff";
+      target.stroke = "rgba(0,0,0,0.1)";
       txt.useHandCursor = true;
     };
     var onOut = function (target) {
-      target.fill = "white";
+      target.fill = "#fff";
       target.stroke = "rgba(0,0,0,0)";
       txt.useHandCursor = false;
     };
