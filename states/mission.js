@@ -3,6 +3,7 @@ var Mission = function(game) {};
 Mission.prototype = {
 
   preload: function () {
+    game.load.image('mission-bg', 'assets/images/mission-screen.png');
     this.optionCount = 1;
     this.creditCount = 0;
   },
@@ -56,6 +57,10 @@ Mission.prototype = {
   },
 
   create: function () {
+
+    //adding background image to main menu
+    game.missionBg = game.add.sprite(0, 0, 'mission-bg');
+
     this.stage.disableVisibilityChange = true;
     // if (gameOptions.playMusic) {
     //   music.stop();
@@ -63,9 +68,11 @@ Mission.prototype = {
     //   music.play();
     // }
     //var bg = game.add.sprite(0, 0, 'gameover-bg');
-    this.addMission('Clean up our coast by \n collecting litter \n from the sea and beach. \n Remember to miss the obstacles \n and leave marine items untouched!', 'Beach Clean Mission');
-    this.addMission('Exit the Premises \n by Kevin Macleod', 'Music Credits');
-    this.addMission('by Nicki Parker', 'Developer Credits');
+
+    // this.addMission('Clean up our coast by \n collecting litter \n from the sea and beach. \n Remember to miss the obstacles \n and leave marine items untouched!', 'Beach Clean Mission');
+    // this.addMission('Exit the Premises \n by Kevin Macleod', 'Music Credits');
+    // this.addMission('by Nicki Parker', 'Developer Credits');
+
     this.addMenuOption('< Back', function (e) {
       game.state.start("GameMenu");
     });
