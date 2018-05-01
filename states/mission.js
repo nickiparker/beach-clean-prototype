@@ -101,7 +101,7 @@ Mission.prototype = {
     // this.addMission('by Nicki Parker', 'Developer Credits');
 
     this.addMenuOption('< Back', function (e) {
-      game.state.start("GameMenu");
+      this.game.state.start("GameMenu");
     });
     //game.add.tween(bg).to({alpha: 0}, 20000, Phaser.Easing.Cubic.Out, true, 40000);
   }
