@@ -8,6 +8,7 @@ GameOver.prototype = {
     //add background image for pop up
     game.load.image('pop-up',  'assets/images/pop-up-background.png');
     game.load.image('gameOverBg', 'assets/images/game-over-background.png');
+    game.load.image('linkButton', 'assets/images/join-beach-clean-button.png');
   },
 
   addMenuOption: function(text, callback) {
@@ -180,6 +181,11 @@ GameOver.prototype = {
       //text1.wordWrapWidth = w * .9;
       //text1.padding.set(60,0);
 
+      //experiment to add url
+      var linkButton = game.add.button(game.world.centerX, game.world.centerY, 'linkButton', function() {   
+          window.open("https://www.sas.org.uk/our-work/beach-cleans/", "_blank");
+        }, this);
+
       //set the width and height passed
       //in the parameters
       back.width = w;
@@ -189,12 +195,19 @@ GameOver.prototype = {
       msgBox.add(back);
       msgBox.add(closeButton);
       msgBox.add(text1);
+      msgBox.add(linkButton);
+
+      //set the close button
+      //in the center horizontally
+      //and near the bottom of the box vertically
+      linkButton.x = back.width / 2 - linkButton.width / 2;
+      linkButton.y = 530 - linkButton.height;
 
       //set the close button
       //in the center horizontally
       //and near the bottom of the box vertically
       closeButton.x = back.width / 2 - closeButton.width / 2;
-      closeButton.y = 557 - closeButton.height;
+      closeButton.y = 585 - closeButton.height;
       //enable the button for input
       closeButton.inputEnabled = true;
       //add a listener to destroy the box when the button is pressed
