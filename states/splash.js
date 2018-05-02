@@ -13,10 +13,6 @@ Splash.prototype = {
     game.load.script('options', 'states/options.js');
   },
 
-  loadMusic: function () {
-    game.load.audio('mainSoundTrack', 'assets/sound effects/background-wave-seagull-sounds.wav');
-  },
-
   loadFonts: function () {
     WebFontConfig = {
       custom: {
@@ -58,13 +54,6 @@ Splash.prototype = {
     game.state.add("Options", Options);
   },
 
-  addGameMusic: function () {
-    music = game.add.audio('mainSoundTrack');
-    music.volume = 0.3;
-    music.loop = true;
-    music.play();
-  },
-
   create: function() {
     this.status.setText('Ready!');
     this.addGameStates();
@@ -73,5 +62,16 @@ Splash.prototype = {
     setTimeout(function () {
       game.state.start("GameMenu");
     }, 1000);
+  },
+
+  // Add music
+  loadMusic: function () {
+    game.load.audio('mainSoundTrack', 'assets/sound effects/background-wave-seagull-sounds.wav');
+  },
+
+  addGameMusic: function () {
+    music = game.add.audio('mainSoundTrack');
+    music.volume = 0.3;
+    music.loop = true;
   }
 };

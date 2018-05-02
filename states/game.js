@@ -10,7 +10,6 @@ var finalNets = 0;
 var finalBottles = 0;
 
 Game.prototype = {
-    
     init: function() {
         game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
         game.scale.pageAlignHorizontally = true;
@@ -61,8 +60,13 @@ Game.prototype = {
     },
 
     create: function() { 
-        // Experiment with adding the background
+        // Adding the background
         game.bg = game.add.tileSprite(0, 0, 375, 667, 'bg');
+
+        // Add the background sound if option to play is true
+        if (gameOptions.playMusic){
+            music.play();
+        }
 
         // This function is called after the preload function     
         // Here we set up the game, display sprites, etc.
@@ -193,8 +197,6 @@ Game.prototype = {
         // Make a sound for the collect
         if (gameOptions.playSound){
             this.collectSound.play();
-            // without this the volume of music resets itself to max?
-            music.volume = 0.3;
         }
 
         // Update score
@@ -381,6 +383,7 @@ Game.prototype = {
         finalNets = this.nets;
         finalBottles = this.bottles;
         finalScore = this.score;
+        music.stop();
         game.state.start('GameOver');
     },
 };

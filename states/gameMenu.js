@@ -50,15 +50,15 @@ GameMenu.prototype = {
   },
 
   create: function () {
-    if (music.name !== "mainSoundTrack" && playMusic) {
-      music.stop();
-      music = game.add.audio('mainSoundTrack');
-      music.volume = 0.3;
-      music.loop = true;
-      music.play();
-    }
+    // if (music.name !== "mainSoundTrack" && playMusic) {
+    //   music.stop();
+    //   music = game.add.audio('mainSoundTrack');
+    //   music.volume = 0.3;
+    //   music.loop = true;
+    //   music.play();
+    // }
 
-    music.volume = 0.3;
+    // music.volume = 0.3;
     game.stage.disableVisibilityChange = true;
 
     //adding background image to main menu
