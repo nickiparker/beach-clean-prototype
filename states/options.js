@@ -63,9 +63,7 @@ Options.prototype = {
     game.add.existing(this.titleText);
     
     this.addMenuOption(playMusic ? 'Mute Music' : 'Play Music', function (target) {
-      console.log("hello");
       playMusic = !playMusic;
-      console.log(playMusic);
       target.text = playMusic ? 'Mute Music' : 'Play Music';
       music.volume = playMusic ? 0.3 : 0;
     });
