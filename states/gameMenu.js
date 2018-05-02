@@ -50,21 +50,17 @@ GameMenu.prototype = {
   },
 
   create: function () {
-    // if (music.name !== "mainSoundTrack" && playMusic) {
-    //   music.stop();
-    //   music = game.add.audio('mainSoundTrack');
-    //   music.volume = 0.3;
-    //   music.loop = true;
-    //   music.play();
-    // }
-
-    // music.volume = 0.3;
     game.stage.disableVisibilityChange = true;
 
     //adding background image to main menu
     game.menuBg = game.add.sprite(0, 0, 'menu-bg');
  
     game.add.existing(this.titleText);
+
+    // Add the background sound if option to play is true
+    if (gameOptions.playMusic){
+      music.play();
+    }
 
     // This allows users to click anywhere on the screen to start the game 
     // ---- start -----

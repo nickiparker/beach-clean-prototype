@@ -63,11 +63,6 @@ Game.prototype = {
         // Adding the background
         game.bg = game.add.tileSprite(0, 0, 375, 667, 'bg');
 
-        // Add the background sound if option to play is true
-        if (gameOptions.playMusic){
-            music.play();
-        }
-
         // This function is called after the preload function     
         // Here we set up the game, display sprites, etc.
         // Change the background color of the game to orange
@@ -383,7 +378,6 @@ Game.prototype = {
         finalNets = this.nets;
         finalBottles = this.bottles;
         finalScore = this.score;
-        music.stop();
         game.state.start('GameOver');
     },
 };
