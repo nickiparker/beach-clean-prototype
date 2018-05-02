@@ -14,15 +14,8 @@ Splash.prototype = {
   },
 
   loadMusic: function () {
-    // credit to Kevin Macleod at http://incompetech.com/
     game.load.audio('mainSoundTrack', 'assets/sound effects/background-wave-seagull-sounds.wav');
   },
-  // Load background images - currently using colours instead of images
-  // loadImages: function () {
-  //   game.load.image('menu-bg', 'assets/images/menu-bg.jpg');
-  //   game.load.image('options-bg', 'assets/images/options-bg.jpg');
-  //   game.load.image('gameover-bg', 'assets/images/gameover-bg.jpg');
-  // },
 
   loadFonts: function () {
     WebFontConfig = {
@@ -46,14 +39,13 @@ Splash.prototype = {
 
   preload: function () {
     game.stage.backgroundColor = "#F7CA6A";
-    //game.add.sprite(0, 0, 'stars');
+
     game.add.existing(this.logo).scale.setTo(0.5);
     game.add.existing(this.loadingBar);
     game.add.existing(this.status);
     this.load.setPreloadSprite(this.loadingBar);
 
     this.loadScripts();
-    // this.loadImages();
     this.loadFonts();
     this.loadMusic();
   },

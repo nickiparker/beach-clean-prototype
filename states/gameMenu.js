@@ -25,10 +25,11 @@ GameMenu.prototype = {
   addMenuOption: function(text, callback) {
     var optionStyle = { font: '25pt ubuntu', fill: 'white', align: 'left', stroke: 'rgba(0,0,0,0)', strokeThickness: 4};
     var txt = game.add.text(game.world.centerX, (this.optionCount * 60) + 410, text, optionStyle);
+    
     txt.anchor.setTo(0.5);
     txt.stroke = "rgba(0,0,0,0)";
     txt.setShadow(2, 2, 'rgba(0,0,0,0.6)', 5);
-    //txt.strokeThickness = 4;
+    
     var onOver = function (target) {
       target.fill = "#fff";
       target.stroke = "rgba(0,0,0,0.1)";
@@ -39,7 +40,7 @@ GameMenu.prototype = {
       target.stroke = "rgba(0,0,0,0)";
       txt.useHandCursor = false;
     };
-    //txt.useHandCursor = true;
+
     txt.inputEnabled = true;
     txt.events.onInputUp.add(callback, this);
     txt.events.onInputOver.add(onOver, this);
@@ -63,17 +64,17 @@ GameMenu.prototype = {
     //adding background image to main menu
     game.menuBg = game.add.sprite(0, 0, 'menu-bg');
  
-    //game.stage.backgroundColor = "#00b6ba";
-
-    //game.add.sprite(0, 0, 'menu-bg');
     game.add.existing(this.titleText);
 
+    // This allows users to click anywhere on the screen to start the game 
+    // ---- start -----
     // start the game when the spacekey is hit
     // var spaceKey = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
     // spaceKey.onDown.add(this.startGame, this);
 
     // // start game with a tap
     // game.input.onTap.add(this.startGame, this);
+    // ---- end -----
 
     // add menu
     this.addMenuOption('Play', function (e) {

@@ -1,6 +1,6 @@
 var Game = function(game) {};
 
-// global variables
+// Global variables
 var collectionTypes = [];
 var naturalTypes = [];
 var finalScore = 0;
@@ -26,7 +26,7 @@ Game.prototype = {
         game.load.image('net', 'assets/images/net.png');
         game.load.image('bucket', 'assets/images/bucket.png');
         
-        // collate collection types
+        // Collate collection types
         collectionTypes = ['can', 'bottle', 'net', 'bucket'];
 
         // Load a natural item
@@ -34,7 +34,7 @@ Game.prototype = {
         game.load.image('crab', 'assets/images/crab.png');
         game.load.image('fish', 'assets/images/fish.png');
 
-        // collate natural items
+        // Collate natural items
         naturalTypes = ['seaweed', 'crab', 'fish'];
         
         // Load the bird sprite
@@ -54,7 +54,7 @@ Game.prototype = {
         game.load.image('fishingBoat', 'assets/images/fishing-boat.png');
         game.load.image('supMan', 'assets/images/sup-man.png');
 
-        // collate collision items
+        // Collate collision items
         collisionTypes = ['largeRock', 'fishingBoat', 'supMan'];
 
         this.optionCount = 1;
@@ -62,8 +62,6 @@ Game.prototype = {
 
     create: function() { 
         // Experiment with adding the background
-        //game.add.sprite(-52, -108, 'bg');
-        //game.bg = game.add.sprite(-52, -108, 'bg');
         game.bg = game.add.tileSprite(0, 0, 375, 667, 'bg');
 
         // This function is called after the preload function     
@@ -116,7 +114,7 @@ Game.prototype = {
         this.collectionItems = game.add.group();
         this.collisionItems = game.add.group();
 
-        // enable physics on the groups
+        // Enable physics on the groups
         game.physics.enable(this.collectionItems, Phaser.Physics.ARCADE);
         game.physics.enable(this.naturalItems, Phaser.Physics.ARCADE);
         game.physics.enable(this.collisionItems, Phaser.Physics.ARCADE);
@@ -199,7 +197,7 @@ Game.prototype = {
             music.volume = 0.3;
         }
 
-        // update score
+        // Update score
         this.score += 1;
         this.labelScore.text = "Score: " + this.score;
     },
@@ -255,7 +253,7 @@ Game.prototype = {
             this.naturalSound.play();
         }
 
-        // update score - penalise by 2 points
+        // Update score - penalise by 2 points
         if (this.score > 1){
             this.score -= 2;
             this.labelScore.text = "Score: " + this.score;    
@@ -347,7 +345,7 @@ Game.prototype = {
         if (this.bird.y < 0 || this.bird.y > 667)
             this.restartGame();
 
-        //Each time the bird collides with a collision item fall off screen
+        // Each time the bird collides with a collision item fall off screen
         game.physics.arcade.overlap(
             this.bird, this.naturalItems, this.collectNaturalItem, null, this);
 
@@ -363,13 +361,13 @@ Game.prototype = {
     // Make the bird jump 
     jump: function() {
 
-        //To stop dead bird jump when it's died
+        // To stop dead bird jump when it's died
         if (this.bird.alive == false)
             return;
         // Add a vertical velocity to the bird
         this.bird.body.velocity.y = -350;
 
-        //Adds sound effect on jump if playSound == true
+        // Adds sound effect on jump if playSound == true
         if (gameOptions.playSound){
             this.jumpSound.play();
         }
